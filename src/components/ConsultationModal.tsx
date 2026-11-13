@@ -3,20 +3,34 @@ import { X, CheckCircle2, MessageSquare, Phone, Mail, Send, Loader2 } from 'luci
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 
+export type ServiceTypeOption = 'sales' | 'ad' | 'both';
+
 interface ConsultationModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialServiceType?: ServiceTypeOption;
 }
 
-export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, onClose }) => {
+export const ConsultationModal: React.FC<ConsultationModalProps> = ({
+  isOpen,
+  onClose,
+  initialServiceType = 'both',
+}) => {
   const [companyName, setCompanyName] = useState('');
   const [contact, setContact] = useState('');
   const [channel, setChannel] = useState('');
-  const [serviceType, setServiceType] = useState<'sales' | 'ad' | 'both'>('both');
+  const [serviceType, setServiceType] = useState<ServiceTypeOption>(initialServiceType);
   const [contactMethod, setContactMethod] = useState<'sms' | 'kakao' | 'email' | 'call'>('kakao');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // 모달이 열릴 때 선택한 서비스 타입으로 동기화
+  React.useEffect(() => {
+    if (isOpen) {
+      setServiceType(initialServiceType);
+    }
+  }, [isOpen, initialServiceType]);
 
   if (!isOpen) return null;
 
@@ -114,7 +128,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
           <div>
             <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">서비스 상담 및 미팅 신청</h3>
             <p className="text-[11px] text-slate-400 mt-0.5">
-              수도권 지역은 대면 미팅 가능합니다.
+              신청하신 연락처와 상담 방법으로 빠르게 연락 드리겠습니다.
             </p>
           </div>
           <button

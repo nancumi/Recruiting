@@ -16,7 +16,7 @@ import {
   Menu,
   X,
 } from 'lucide-react';
-import { ConsultationModal } from './components/ConsultationModal';
+import { ConsultationModal, type ServiceTypeOption } from './components/ConsultationModal';
 import { ToolDetailModal, type ToolItem } from './components/ToolDetailModal';
 import { CORE_TOOLS } from './data/tools';
 import { Pagination } from './components/Pagination';
@@ -24,6 +24,7 @@ import { ScrollReveal } from './components/ScrollReveal';
 
 export function App() {
   const [isConsultOpen, setIsConsultOpen] = useState(false);
+  const [consultServiceType, setConsultServiceType] = useState<ServiceTypeOption>('both');
   const [selectedTool, setSelectedTool] = useState<ToolItem | null>(null);
   const [toolPage, setToolPage] = useState(1);
   const [showFloatingNav, setShowFloatingNav] = useState(false);
@@ -57,6 +58,10 @@ export function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const openConsultWith = (type: ServiceTypeOption = 'both') => {
+    setConsultServiceType(type);
+    setIsConsultOpen(true);
+  };
   const toolsPerPage = 3;
   const totalToolPages = Math.ceil(CORE_TOOLS.length / toolsPerPage) || 1;
   const currentTools = CORE_TOOLS.slice(
@@ -644,7 +649,7 @@ export function App() {
 
                 <div className="pt-8">
                   <button
-                    onClick={() => setIsConsultOpen(true)}
+                    onClick={() => openConsultWith('sales')}
                     className="w-full py-3.5 rounded-2xl text-xs sm:text-sm font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
                   >
                     판매관리 신청하기
@@ -684,7 +689,7 @@ export function App() {
 
                 <div className="pt-8">
                   <button
-                    onClick={() => setIsConsultOpen(true)}
+                    onClick={() => openConsultWith('ad')}
                     className="w-full py-3.5 rounded-2xl text-xs sm:text-sm font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
                   >
                     광고관리 신청하기
@@ -730,7 +735,7 @@ export function App() {
 
                 <div className="pt-8">
                   <button
-                    onClick={() => setIsConsultOpen(true)}
+                    onClick={() => openConsultWith('both')}
                     className="w-full py-3.5 rounded-2xl text-xs sm:text-sm font-bold bg-indigo-500 hover:bg-indigo-400 text-white transition-all shadow-lg shadow-indigo-500/30"
                   >
                     올인원 플랜 신청하기
@@ -791,10 +796,10 @@ export function App() {
 
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
             <button
-              onClick={() => setIsConsultOpen(true)}
+              onClick={() => openConsultWith('both')}
               className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-sm bg-indigo-500 hover:bg-indigo-400 text-white transition-all shadow-xl shadow-indigo-500/20"
             >
-              화면 최하단 상담 신청하기
+              상담 신청하기
             </button>
           </div>
         </div>
@@ -807,6 +812,7 @@ export function App() {
       <ConsultationModal
         isOpen={isConsultOpen}
         onClose={() => setIsConsultOpen(false)}
+        initialServiceType={consultServiceType}
       />
 
       <ToolDetailModal
