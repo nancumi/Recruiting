@@ -19,14 +19,12 @@ import {
 import { ConsultationModal } from './components/ConsultationModal';
 import { ToolDetailModal, type ToolItem } from './components/ToolDetailModal';
 import { CORE_TOOLS } from './data/tools';
-import { SearchInput } from './components/SearchInput';
 import { Pagination } from './components/Pagination';
 import { ScrollReveal } from './components/ScrollReveal';
 
 export function App() {
   const [isConsultOpen, setIsConsultOpen] = useState(false);
   const [selectedTool, setSelectedTool] = useState<ToolItem | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
   const [toolPage, setToolPage] = useState(1);
   const [showFloatingNav, setShowFloatingNav] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -59,29 +57,12 @@ export function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 검색 필터링된 도구 목록
-  const filteredTools = CORE_TOOLS.filter((t) => {
-    if (!searchQuery.trim()) return true;
-    const q = searchQuery.toLowerCase();
-    return (
-      t.name.toLowerCase().includes(q) ||
-      t.category.toLowerCase().includes(q) ||
-      t.shortDesc.toLowerCase().includes(q) ||
-      t.fullDesc.toLowerCase().includes(q)
-    );
-  });
-
   const toolsPerPage = 3;
-  const totalToolPages = Math.ceil(filteredTools.length / toolsPerPage) || 1;
-  const currentTools = filteredTools.slice(
+  const totalToolPages = Math.ceil(CORE_TOOLS.length / toolsPerPage) || 1;
+  const currentTools = CORE_TOOLS.slice(
     (toolPage - 1) * toolsPerPage,
     toolPage * toolsPerPage
   );
-
-  const handleToolSearch = (q: string) => {
-    setSearchQuery(q);
-    setToolPage(1);
-  };
 
   const navItems = [
     { id: 'philosophy', label: '운영 철학' },
@@ -237,7 +218,7 @@ export function App() {
 
               <div className="bg-slate-900/80 backdrop-blur-sm p-6 sm:p-7 rounded-3xl border border-slate-800 hover:border-indigo-500/50 transition-all shadow-xl hover:-translate-y-1">
                 <div className="text-xs sm:text-sm font-semibold text-slate-400 mb-1">대규모 캠페인 밀착 핸들링</div>
-                <div className="text-3xl sm:text-4xl font-black text-white mb-2">120개</div>
+                <div className="text-3xl sm:text-4xl font-black text-white mb-2">대규모</div>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   주력 채널 동시 운영, 실시간 누수 차단과 ROAS 극대화로 광고 효율 최적화
                 </p>
@@ -491,11 +472,11 @@ export function App() {
                     06. 광고 운영 & ROAS 극대화
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    주력 채널, 120개 캠페인 단독 운영 실전 경험. 전용 분석 툴로 누수 광고비를 즉각 차단하고 목표 ROAS를 달성합니다.
+                    주력 채널, 대규모 캠페인 단독 운영 실전 경험. 전용 분석 툴로 누수 광고비를 즉각 차단하고 목표 ROAS를 달성합니다.
                   </p>
                 </div>
                 <div className="pt-3 border-t border-slate-800 text-xs text-rose-400 font-semibold">
-                  120개 캠페인 밀착 핸들링
+                  대규모 캠페인 밀착 핸들링
                 </div>
               </div>
             </ScrollReveal>
@@ -543,29 +524,19 @@ export function App() {
         </div>
       </section>
 
-      {/* 5. 자체 개발 프로그램 쇼케이스 (검색창, 모달창, 페이지네이션 탑재) */}
+      {/* 5. 자체 개발 프로그램 쇼케이스 (모달창, 페이지네이션 탑재) */}
       <section id="tools" className="py-24 max-w-6xl mx-auto px-6 sm:px-8">
         <ScrollReveal>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div>
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest bg-indigo-950/70 border border-indigo-800/60 px-3 py-1.5 rounded-full">
-                Proprietary Tools
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-2">
-                실무에 직접 사용하는 자체 개발 프로그램
-              </h2>
-              <p className="text-slate-400 text-sm sm:text-base">
-                "저희는 이런 프로그램을 사용하여 판매흐름 분석과 광고관리를 하고 있습니다."
-              </p>
-            </div>
-
-            {/* 검색창 컴포넌트 (규격 준수) */}
-            <div className="w-full md:w-80">
-              <SearchInput
-                placeholder="프로그램명 또는 기능 검색..."
-                onSearch={handleToolSearch}
-              />
-            </div>
+          <div className="mb-12">
+            <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest bg-indigo-950/70 border border-indigo-800/60 px-3 py-1.5 rounded-full">
+              Proprietary Tools
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-2">
+              실무에 직접 사용하는 자체 개발 프로그램
+            </h2>
+            <p className="text-slate-400 text-sm sm:text-base">
+              "저희는 이런 프로그램을 사용하여 판매흐름 분석과 광고관리를 하고 있습니다."
+            </p>
           </div>
         </ScrollReveal>
 
