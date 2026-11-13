@@ -229,7 +229,7 @@ export function App() {
 
               <div className="bg-slate-900/80 backdrop-blur-sm p-6 sm:p-7 rounded-3xl border border-slate-800 hover:border-indigo-500/50 transition-all shadow-xl hover:-translate-y-1">
                 <div className="text-xs sm:text-sm font-semibold text-slate-400 mb-1">초고속 상품 최적화</div>
-                <div className="text-3xl sm:text-4xl font-black text-emerald-400 mb-2">2~3일</div>
+                <div className="text-3xl sm:text-4xl font-black text-emerald-400 mb-2">4~5일</div>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   상품 100개 기준 최적화를 4~5일 만에 완료하여 일반 작업자 대비 2~3배 빠른 시장 선점
                 </p>
@@ -451,11 +451,11 @@ export function App() {
                     04. 초고속 상품 최적화
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    매출 성장의 필수 선행 작업인 기초 상품 등록 및 알고리즘 최적화를 100개 기준 단 2~3일 만에 완료하여 시장 기회를 선점합니다.
+                    매출 성장의 필수 선행 작업인 기초 상품 등록 및 알고리즘 최적화를 100개 기준 단 4~5일 만에 완료하여 시장 기회를 선점합니다.
                   </p>
                 </div>
                 <div className="pt-3 border-t border-slate-800 text-xs text-amber-400 font-semibold">
-                  100개 기준 2~3일 완료 노하우
+                  100개 기준 4~5일 완료 노하우
                 </div>
               </div>
             </ScrollReveal>
@@ -471,7 +471,7 @@ export function App() {
                     05. 상세페이지 원스톱 제작
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    고객 리뷰 분석 기반 고전환 기획. 실물 제품과 스마트폰만으로 스튜디오 퀄리티의 상세페이지를 1~2일 내 단독 기획·제작합니다.
+                    고객 리뷰 분석 기반 고전환 기획. 실물 제품과 스마트폰만으로 스튜디오 퀄리티의 상세페이지를 2~3일 내 단독 기획·제작합니다.
                   </p>
                 </div>
                 <div className="pt-3 border-t border-slate-800 text-xs text-purple-400 font-semibold">
@@ -491,7 +491,7 @@ export function App() {
                     06. 광고 운영 & ROAS 극대화
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    5개 주력 채널, 120개 캠페인 단독 운영 실전 경험. 전용 분석 툴로 누수 광고비를 즉각 차단하고 목표 ROAS를 달성합니다.
+                    주력 채널, 120개 캠페인 단독 운영 실전 경험. 전용 분석 툴로 누수 광고비를 즉각 차단하고 목표 ROAS를 달성합니다.
                   </p>
                 </div>
                 <div className="pt-3 border-t border-slate-800 text-xs text-rose-400 font-semibold">
