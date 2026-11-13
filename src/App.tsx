@@ -88,7 +88,7 @@ export function App() {
               MD
             </div>
             <span className="font-bold text-white tracking-tight text-sm hidden sm:inline-block">
-              15년 차 시니어 MD & AI 스페셜리스트
+              15년 차 총괄 MD & AI 스페셜리스트
             </span>
           </a>
 
@@ -163,9 +163,9 @@ export function App() {
             </div>
           </ScrollReveal>
 
-          {/* 메인 헤드라인 (밑줄 효과 삭제, 굵고 시원한 타이포) */}
+          {/* 메인 헤드라인 */}
           <ScrollReveal delay={200}>
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-[1.2] mb-8">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.25] mb-6 sm:mb-8 break-keep">
               판매 관리와 광고비 지출,
               <br />
               <span className="text-indigo-400">
@@ -176,10 +176,10 @@ export function App() {
 
           {/* 서브 카피 */}
           <ScrollReveal delay={300}>
-            <p className="text-slate-300 max-w-4xl mx-auto text-base sm:text-xl font-normal leading-relaxed mb-12">
+            <p className="text-slate-300 max-w-4xl mx-auto text-sm sm:text-lg md:text-xl font-normal leading-relaxed mb-10 sm:mb-12 break-keep">
               업무의 90% 이상에 AI를 도입하고 전용 관리 프로그램을 직접 개발하여 활용합니다.
-              <br />
-              <span className="inline-block whitespace-nowrap">
+              <br className="hidden sm:inline" />{' '}
+              <span className="sm:inline-block">
                 15년 실무 안목과 자체 자동화 기술로 남들보다{' '}
                 <strong className="text-white font-bold">
                   2~3배 빠르고 정교하게
@@ -194,32 +194,32 @@ export function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto mb-14 text-left">
               <div className="bg-slate-900/80 backdrop-blur-sm p-6 sm:p-7 rounded-3xl border border-slate-800 hover:border-indigo-500/50 transition-all shadow-xl hover:-translate-y-1">
                 <div className="text-xs sm:text-sm font-semibold text-slate-400 mb-1">검증된 현장 경험</div>
-                <div className="text-3xl sm:text-4xl font-black text-white mb-2">15년 차</div>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <div className="text-2xl sm:text-4xl font-black text-white mb-2">15년 차</div>
+                <p className="text-xs text-slate-300 leading-relaxed break-keep">
                   제조사 PM 및 MD팀장 11년 포함, 소싱부터 유통 채널 확장까지 풍부한 총괄 실무
                 </p>
               </div>
 
               <div className="bg-slate-900/80 backdrop-blur-sm p-6 sm:p-7 rounded-3xl border border-slate-800 hover:border-indigo-500/50 transition-all shadow-xl hover:-translate-y-1">
                 <div className="text-xs sm:text-sm font-semibold text-slate-400 mb-1">실무 AI 자동화 개발</div>
-                <div className="text-3xl sm:text-4xl font-black text-indigo-400 mb-2">90%+</div>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <div className="text-2xl sm:text-4xl font-black text-indigo-400 mb-2">90%+</div>
+                <p className="text-xs text-slate-300 leading-relaxed break-keep">
                   단순 반복 수작업을 없애고 전용 프로그램을 직접 개발해 판매·광고를 정밀 분석
                 </p>
               </div>
 
               <div className="bg-slate-900/80 backdrop-blur-sm p-6 sm:p-7 rounded-3xl border border-slate-800 hover:border-indigo-500/50 transition-all shadow-xl hover:-translate-y-1">
                 <div className="text-xs sm:text-sm font-semibold text-slate-400 mb-1">초고속 상품 최적화</div>
-                <div className="text-3xl sm:text-4xl font-black text-emerald-400 mb-2">4~5일</div>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <div className="text-2xl sm:text-4xl font-black text-emerald-400 mb-2">4~5일</div>
+                <p className="text-xs text-slate-300 leading-relaxed break-keep">
                   상품 100개 기준 최적화를 4~5일 만에 완료하여 일반 작업자 대비 2~3배 빠른 시장 선점
                 </p>
               </div>
 
               <div className="bg-slate-900/80 backdrop-blur-sm p-6 sm:p-7 rounded-3xl border border-slate-800 hover:border-indigo-500/50 transition-all shadow-xl hover:-translate-y-1">
-                <div className="text-xs sm:text-sm font-semibold text-slate-400 mb-1">대규모 캠페인 밀착 핸들링</div>
-                <div className="text-3xl sm:text-4xl font-black text-white mb-2">대규모</div>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <div className="text-xs sm:text-sm font-semibold text-slate-400 mb-1">광고 캠페인 운영</div>
+                <div className="text-2xl sm:text-4xl font-black text-white mb-2">밀착 운영</div>
+                <p className="text-xs text-slate-300 leading-relaxed break-keep">
                   주력 채널 동시 운영, 실시간 누수 차단과 ROAS 극대화로 광고 효율 최적화
                 </p>
               </div>
@@ -311,7 +311,7 @@ export function App() {
               <div className="w-1.5 h-full bg-indigo-500 absolute left-0 top-0" />
               <div className="flex items-center gap-2 mb-4">
                 <span className="px-3 py-1 rounded-lg bg-indigo-950/90 border border-indigo-600/70 text-indigo-300 text-xs font-bold">
-                  15년 차 시니어 MD + 자체 AI 솔루션
+                  15년 차 총괄 MD + 자체 AI 솔루션
                 </span>
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-white mb-4">
@@ -779,7 +779,7 @@ export function App() {
                 MD
               </div>
               <span className="text-white font-bold text-lg">
-                15년 차 시니어 MD & AI 자동화 파트너
+                15년 차 총괄 MD & AI 자동화 파트너
               </span>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
