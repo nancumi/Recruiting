@@ -52,45 +52,32 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
         contactMethod === 'sms'
           ? '문자'
           : contactMethod === 'kakao'
-          ? '카카오톡'
+          ? '카톡'
           : contactMethod === 'email'
-          ? '이메일'
+          ? '메일'
           : '전화';
 
-      // 1. MyToDoList 앱과 호환되는 todos 컬렉션에 새 할일/상담신청으로 등록
-      const now = new Date();
-      const formattedDate = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      // 사용자가 입력한 모든 내용을 줄바꿈으로 title에 구성
+      const fullTitleContent = [
+        `업체이름 : ${companyName}`,
+        `전화번호 또는 이메일 : ${contact}`,
+        `관리가 필요한 채널 : ${channel || '없음'}`,
+        `필요한 관리 서비스 : ${serviceTypeLabel}`,
+        `선호하는 상담 방법 : ${contactMethodLabel}`,
+        message ? `남기실 말씀 : ${message}` : null,
+      ]
+        .filter(Boolean)
+        .join('\n');
 
+      const now = new Date();
+
+      // todos 컬렉션에 지정된 스키마 형식으로 등록
       await addDoc(collection(db, 'todos'), {
-        title: `[상담신청] ${companyName} (${serviceTypeLabel})`,
+        title: fullTitleContent,
         completed: false,
         createdAt: serverTimestamp(),
-        dateString: formattedDate,
-        companyName,
-        contact,
-        channel: channel || '미지정',
-        serviceType: serviceTypeLabel,
-        contactMethod: contactMethodLabel,
-        message: message || '',
-        type: 'consultation',
-        images: [],
-        documents: [],
-        audios: [],
-        alarmTime: null,
-        notificationId: null,
-      });
-
-      // 2. 별도 consultations 컬렉션에도 구조화 저장
-      await addDoc(collection(db, 'consultations'), {
-        companyName,
-        contact,
-        channel: channel || '',
-        serviceType: serviceTypeLabel,
-        contactMethod: contactMethodLabel,
-        message: message || '',
-        appliedAt: serverTimestamp(),
-        createdAtString: formattedDate,
-        status: 'pending',
+        alarmTime: now.toISOString(),
+        completedAt: now.toISOString(),
       });
 
       setIsSubmitted(true);
@@ -148,13 +135,11 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
               </div>
               <h4 className="text-base font-semibold text-white">상담 신청이 완료되었습니다</h4>
               <p className="text-[12px] text-slate-300 leading-relaxed max-w-sm mx-auto">
-                데이터베이스에 정상 등록되었습니다.
-                <br />
                 남겨주신 정보({companyName} / {contact})를 확인하여 빠른 시간 내에{' '}
                 <span className="font-semibold text-indigo-400">
                   {contactMethod === 'sms' && '문자'}
-                  {contactMethod === 'kakao' && '카카오톡'}
-                  {contactMethod === 'email' && '이메일'}
+                  {contactMethod === 'kakao' && '카톡'}
+                  {contactMethod === 'email' && '메일'}
                   {contactMethod === 'call' && '전화'}
                 </span>
                 로 안내 드리겠습니다.
