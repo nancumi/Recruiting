@@ -59,6 +59,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
 
       // 사용자가 입력한 모든 내용을 줄바꿈으로 title에 구성
       const fullTitleContent = [
+        '♥ 상담신청 ♥',
         `업체이름 : ${companyName}`,
         `전화번호 또는 이메일 : ${contact}`,
         `관리가 필요한 채널 : ${channel || '없음'}`,
