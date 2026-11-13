@@ -185,7 +185,7 @@ export function App() {
           {/* 메인 헤드라인 (밑줄 효과 삭제, 굵고 시원한 타이포) */}
           <ScrollReveal delay={200}>
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-[1.2] mb-8">
-              판매 흐름과 광고비 지출,
+              판매 관리와 광고비 지출,
               <br />
               <span className="text-indigo-400">
                 절대 '감'으로 판단하지 않습니다
@@ -310,11 +310,11 @@ export function App() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-rose-400 font-black text-base shrink-0">✕</span>
-                  <span>비효율 광고 키워드를 제때 차단하지 못해 누수 광고비 지속 발생</span>
+                  <span>비효율 광고 캠페인을 제때 차단하지 못해 누수 광고비 지속 발생</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-rose-400 font-black text-base shrink-0">✕</span>
-                  <span>경쟁사의 실시간 가격 인하 및 품절 상황을 뒤늦게 파악하여 기회 상실</span>
+                  <span>경쟁사의 가격 인하 및 품절 상황을 뒤늦게 파악하여 기회 상실</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-rose-400 font-black text-base shrink-0">✕</span>
@@ -343,15 +343,15 @@ export function App() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-emerald-400 font-black text-base shrink-0">✓</span>
-                  <span>ROAS 미달 키워드 실시간 식별 및 광고비 누수 즉각 차단</span>
+                  <span>ROAS 미달 캠페인을 실시간 식별 및 광고비 누수 즉각 차단</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-emerald-400 font-black text-base shrink-0">✓</span>
-                  <span>경쟁사 가격·리뷰 변동 24시간 모니터링으로 최적의 프로모션 제안</span>
+                  <span>경쟁사 가격·리뷰 변동 모니터링으로 최적의 프로모션 제안</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-emerald-400 font-black text-base shrink-0">✓</span>
-                  <span>초고속 상품 최적화 엔진으로 100개 기준 단 2~3일 만에 완료</span>
+                  <span>상품 최적화 100개 기준 단 4~5일 만에 완료</span>
                 </li>
               </ul>
             </div>
