@@ -107,12 +107,12 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-lg bg-slate-900 rounded-2xl shadow-2xl border border-slate-700/80 overflow-hidden text-slate-200"
+        className="w-full max-w-lg max-h-[92vh] flex flex-col bg-slate-900 rounded-2xl shadow-2xl border border-slate-700/80 overflow-hidden text-slate-200"
       >
         {/* 모달 헤더 */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-800/60">
+        <div className="shrink-0 flex items-center justify-between px-5 sm:px-6 py-3.5 sm:py-4 border-b border-slate-800 bg-slate-800/60">
           <div>
-            <h3 className="text-base font-bold text-white tracking-tight">서비스 상담 및 미팅 신청</h3>
+            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">서비스 상담 및 미팅 신청</h3>
             <p className="text-[11px] text-slate-400 mt-0.5">
               수도권 지역은 대면 미팅 가능합니다.
             </p>
@@ -125,8 +125,8 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
           </button>
         </div>
 
-        {/* 모달 바디 */}
-        <div className="p-6">
+        {/* 모달 바디 (스크롤 가능하게 처리) */}
+        <div className="p-5 sm:p-6 overflow-y-auto">
           {isSubmitted ? (
             <div className="py-8 text-center space-y-3">
               <div className="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-2 border border-emerald-500/30">
@@ -157,10 +157,10 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* 업체명 & 연락처 (한 줄로 배치) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* 업체명 & 전화번호 또는 이메일 (한 줄로 배치) */}
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">
+                  <label className="block text-[11px] font-semibold text-slate-300 mb-1 truncate">
                     업체 이름 <span className="text-rose-400">*</span>
                   </label>
                   <input
@@ -174,8 +174,8 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">
-                    연락처 (전화번호 또는 이메일) <span className="text-rose-400">*</span>
+                  <label className="block text-[11px] font-semibold text-slate-300 mb-1 truncate">
+                    전화번호 또는 이메일 <span className="text-rose-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -188,10 +188,10 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                 </div>
               </div>
 
-              {/* 관리가 필요한 채널 이름 */}
+              {/* 관리가 필요한 채널 */}
               <div>
                 <label className="block text-[11px] font-semibold text-slate-300 mb-1">
-                  관리가 필요한 채널 이름 <span className="text-slate-500 font-normal">(복수 가능)</span>
+                  관리가 필요한 채널 <span className="text-slate-500 font-normal">(복수 가능)</span>
                 </label>
                 <input
                   type="text"
@@ -202,7 +202,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                 />
               </div>
 
-              {/* 서비스 선택 (문구: 판매 + 광고관리) */}
+              {/* 서비스 선택 */}
               <div>
                 <label className="block text-[11px] font-semibold text-slate-300 mb-1.5">
                   필요한 관리 서비스 <span className="text-rose-400">*</span>
@@ -241,7 +241,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                         : 'border-slate-800 bg-slate-800/60 text-slate-400 hover:bg-slate-800'
                     }`}
                   >
-                    판매 + 광고관리
+                    판매 + 광고
                     <span className="block text-[11px] font-normal text-emerald-400 mt-0.5">월 30만원</span>
                   </button>
                 </div>
@@ -255,8 +255,8 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                 <div className="grid grid-cols-4 gap-2">
                   {[
                     { id: 'sms', label: '문자', icon: MessageSquare },
-                    { id: 'kakao', label: '카카오톡', icon: Send },
-                    { id: 'email', label: '이메일', icon: Mail },
+                    { id: 'kakao', label: '카톡', icon: Send },
+                    { id: 'email', label: '메일', icon: Mail },
                     { id: 'call', label: '전화', icon: Phone },
                   ].map((item) => {
                     const Icon = item.icon;
@@ -266,7 +266,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                         key={item.id}
                         type="button"
                         onClick={() => setContactMethod(item.id as any)}
-                        className={`py-2 px-2 rounded-xl text-[12px] font-medium border flex items-center justify-center gap-1.5 transition-all ${
+                        className={`py-2 px-1 rounded-xl text-[12px] font-medium border flex items-center justify-center gap-1 transition-all ${
                           active
                             ? 'border-indigo-500 bg-indigo-950/80 text-white font-semibold'
                             : 'border-slate-800 bg-slate-800/50 text-slate-400 hover:bg-slate-800'
@@ -280,13 +280,13 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
                 </div>
               </div>
 
-              {/* 남기실 말씀 (기본 5줄) */}
+              {/* 남기실 말씀 */}
               <div>
                 <label className="block text-[11px] font-semibold text-slate-300 mb-1">
-                  남기실 말씀 <span className="text-slate-500 font-normal">(선택)</span>
+                  남기실 말씀
                 </label>
                 <textarea
-                  rows={5}
+                  rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder=""
