@@ -15,6 +15,9 @@ import {
   ChevronRight,
   Menu,
   X,
+  UserCheck,
+  TrendingUp,
+  Settings,
 } from 'lucide-react';
 import { ConsultationModal, type ServiceTypeOption } from './components/ConsultationModal';
 import { ToolDetailModal, type ToolItem } from './components/ToolDetailModal';
@@ -41,7 +44,7 @@ export function App() {
         setShowFloatingNav(false);
       }
 
-      const sections = ['philosophy', 'competencies', 'tools', 'pricing', 'meeting'];
+      const sections = ['target', 'philosophy', 'competencies', 'tools', 'pricing', 'meeting'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -70,6 +73,7 @@ export function App() {
   );
 
   const navItems = [
+    { id: 'target', label: '추천 대상' },
     { id: 'philosophy', label: '운영 철학' },
     { id: 'competencies', label: '수행 역량' },
     { id: 'tools', label: '자체 개발 툴' },
@@ -256,6 +260,84 @@ export function App() {
         </div>
       </section>
 
+      {/* 2. 이런 분들에게 적극 추천합니다 (추천 대상 섹션) */}
+      <section id="target" className="py-20 max-w-6xl mx-auto px-6 sm:px-8 border-b border-slate-800/80">
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest bg-indigo-950/70 border border-indigo-800/60 px-3 py-1.5 rounded-full">
+              Recommended For
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mt-4 mb-3 leading-snug">
+              이런 고민을 하고 계신다면
+              <br />
+              확실한 해결책이 되어 드립니다
+            </h2>
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+              정규직 채용 부담 없이, 15년 차 검증된 실무 총괄의 실행력과 AI 시스템을 필요한 만큼 활용하세요.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          <ScrollReveal delay={100}>
+            <div className="bg-slate-900/80 p-7 rounded-3xl border border-slate-800 hover:border-indigo-500/60 transition-all shadow-xl flex flex-col justify-between h-full group hover:-translate-y-1">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-indigo-950 text-indigo-400 border border-indigo-800/60 flex items-center justify-center mb-5 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-inner">
+                  <UserCheck className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-base sm:text-lg text-white mb-2.5">
+                  직원 채용이 부담스러울 때
+                </h3>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  직원이 필요하긴 하지만 인건비, 4대 보험, 퇴직금 등 정규직 채용에 대한 고정비 부담이 크거나 검증되지 않은 인력 채용에 망설여지는 대표님
+                </p>
+              </div>
+              <div className="pt-4 mt-6 border-t border-slate-800/80 text-xs text-indigo-400 font-semibold">
+                합리적 월 단위 비용으로 전담 총괄 운용
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={200}>
+            <div className="bg-slate-900/80 p-7 rounded-3xl border border-slate-800 hover:border-emerald-500/60 transition-all shadow-xl flex flex-col justify-between h-full group hover:-translate-y-1">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-emerald-950 text-emerald-400 border border-emerald-800/60 flex items-center justify-center mb-5 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
+                  <TrendingUp className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-base sm:text-lg text-white mb-2.5">
+                  채널 확장에 경험자가 필요할 때
+                </h3>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  스마트스토어, 쿠팡 등 새로운 유통 채널로 확장하고 싶은데 플랫폼별 로직과 판매 알고리즘을 꿰뚫고 있는 실무 경험자가 절실한 분
+                </p>
+              </div>
+              <div className="pt-4 mt-6 border-t border-slate-800/80 text-xs text-emerald-400 font-semibold">
+                15년 차의 실전 노하우로 시행착오 차단
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={300}>
+            <div className="bg-slate-900/80 p-7 rounded-3xl border border-slate-800 hover:border-blue-500/60 transition-all shadow-xl flex flex-col justify-between h-full group hover:-translate-y-1">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-blue-950 text-blue-400 border border-blue-800/60 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-inner">
+                  <Settings className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-base sm:text-lg text-white mb-2.5">
+                  체계적 관리가 필요할 때
+                </h3>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  감에 의존한 판매나 누수되는 광고비를 방치하지 않고, 데이터 분석과 자체 개발 툴을 통해 정밀하고 체계적으로 쇼핑몰을 관리하고 싶은 분
+                </p>
+              </div>
+              <div className="pt-4 mt-6 border-t border-slate-800/80 text-xs text-blue-400 font-semibold">
+                데이터 기반 판매 & 광고 누수 완전 통제
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* 3. 왜 감이 아닌 시스템인가? (운영 철학 섹션) */}
       <section id="philosophy" className="py-24 max-w-6xl mx-auto px-6 sm:px-8">
         <ScrollReveal>
@@ -370,8 +452,13 @@ export function App() {
             <ScrollReveal delay={100}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-indigo-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
-                  <div className="w-11 h-11 rounded-2xl bg-indigo-950 text-indigo-400 border border-indigo-800/60 flex items-center justify-center mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                    <Cpu className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-indigo-950 text-indigo-400 border border-indigo-800/60 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                      <Cpu className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2.5 py-1 rounded-full">
+                      추가 비용 발생
+                    </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
                     01. AI & 자동화 툴 개발
@@ -390,8 +477,13 @@ export function App() {
             <ScrollReveal delay={150}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-emerald-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
-                  <div className="w-11 h-11 rounded-2xl bg-emerald-950 text-emerald-400 border border-emerald-800/60 flex items-center justify-center mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-all">
-                    <Package className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-emerald-950 text-emerald-400 border border-emerald-800/60 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                      <Package className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2.5 py-1 rounded-full">
+                      기본 구성
+                    </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
                     02. 상품 소싱 & 기획
@@ -410,8 +502,13 @@ export function App() {
             <ScrollReveal delay={200}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-blue-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
-                  <div className="w-11 h-11 rounded-2xl bg-blue-950 text-blue-400 border border-blue-800/60 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                    <BarChart3 className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-blue-950 text-blue-400 border border-blue-800/60 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                      <BarChart3 className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2.5 py-1 rounded-full">
+                      기본 구성
+                    </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
                     03. 판매관리 & 전략 수립
@@ -430,8 +527,13 @@ export function App() {
             <ScrollReveal delay={250}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-amber-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
-                  <div className="w-11 h-11 rounded-2xl bg-amber-950 text-amber-400 border border-amber-800/60 flex items-center justify-center mb-4 group-hover:bg-amber-600 group-hover:text-white transition-all">
-                    <Zap className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-amber-950 text-amber-400 border border-amber-800/60 flex items-center justify-center group-hover:bg-amber-600 group-hover:text-white transition-all">
+                      <Zap className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2.5 py-1 rounded-full">
+                      기본 구성
+                    </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
                     04. 초고속 상품 최적화
@@ -450,8 +552,13 @@ export function App() {
             <ScrollReveal delay={300}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-purple-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
-                  <div className="w-11 h-11 rounded-2xl bg-purple-950 text-purple-400 border border-purple-800/60 flex items-center justify-center mb-4 group-hover:bg-purple-600 group-hover:text-white transition-all">
-                    <Layers className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-purple-950 text-purple-400 border border-purple-800/60 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-all">
+                      <Layers className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2.5 py-1 rounded-full">
+                      추가 비용 발생
+                    </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
                     05. 상세페이지 원스톱 제작
@@ -470,8 +577,13 @@ export function App() {
             <ScrollReveal delay={350}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-rose-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
-                  <div className="w-11 h-11 rounded-2xl bg-rose-950 text-rose-400 border border-rose-800/60 flex items-center justify-center mb-4 group-hover:bg-rose-600 group-hover:text-white transition-all">
-                    <Flame className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-rose-950 text-rose-400 border border-rose-800/60 flex items-center justify-center group-hover:bg-rose-600 group-hover:text-white transition-all">
+                      <Flame className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2.5 py-1 rounded-full">
+                      기본 구성
+                    </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
                     06. 광고 운영 & ROAS 극대화
@@ -490,8 +602,13 @@ export function App() {
             <ScrollReveal delay={400}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-teal-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
-                  <div className="w-11 h-11 rounded-2xl bg-teal-950 text-teal-400 border border-teal-800/60 flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition-all">
-                    <CalendarCheck className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-teal-950 text-teal-400 border border-teal-800/60 flex items-center justify-center group-hover:bg-teal-600 group-hover:text-white transition-all">
+                      <CalendarCheck className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2.5 py-1 rounded-full">
+                      기본 구성
+                    </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
                     07. 행사 제안 & 일정 조율
@@ -510,8 +627,13 @@ export function App() {
             <ScrollReveal delay={450}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-orange-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
-                  <div className="w-11 h-11 rounded-2xl bg-orange-950 text-orange-400 border border-orange-800/60 flex items-center justify-center mb-4 group-hover:bg-orange-600 group-hover:text-white transition-all">
-                    <Tv className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-orange-950 text-orange-400 border border-orange-800/60 flex items-center justify-center group-hover:bg-orange-600 group-hover:text-white transition-all">
+                      <Tv className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2.5 py-1 rounded-full">
+                      추가 비용 발생
+                    </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
                     08. 광고 없는 외부 유입
@@ -720,11 +842,11 @@ export function App() {
                   <ul className="space-y-3.5 text-slate-200 text-xs sm:text-sm">
                     <li className="flex items-start gap-2.5 font-medium">
                       <Check className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
-                      <span>판매관리 전 항목 포함 (상품등록, 분석, 행사)</span>
+                      <span>판매관리 전 항목 포함</span>
                     </li>
                     <li className="flex items-start gap-2.5 font-medium">
                       <Check className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
-                      <span>광고관리 전 항목 포함 (세팅, ROAS, 누수차단)</span>
+                      <span>광고관리 전 항목 포함</span>
                     </li>
                     <li className="flex items-start gap-2.5 text-indigo-300 font-bold">
                       <Check className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
