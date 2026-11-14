@@ -178,7 +178,7 @@ export function App() {
               판매 관리와 광고비 지출,
               <br />
               <span className="text-indigo-400">
-                절대 '감'으로 판단하지 않습니다
+                절대 '감'으로 판단해서는 안됩니다
               </span>
             </h1>
           </ScrollReveal>
