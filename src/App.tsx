@@ -450,35 +450,10 @@ export function App() {
             </div>
           </ScrollReveal>
 
-          {/* 8대 역량 그리드 카드 */}
+          {/* 8대 역량 그리드 카드 (기본 구성 01~05, 추가 비용 발생 06~08) */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {/* 1. AI 업무 자동화 */}
+            {/* 1. 상품 소싱 & 기획 (기본 구성) */}
             <ScrollReveal delay={100}>
-              <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-indigo-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-11 h-11 rounded-2xl bg-indigo-950 text-indigo-400 border border-indigo-800/60 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                      <Cpu className="w-5 h-5" />
-                    </div>
-                    <span className="text-[11px] font-semibold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2.5 py-1 rounded-full">
-                      추가 비용 발생
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-base text-white mb-2">
-                    01. AI & 자동화 툴 개발
-                  </h3>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    실무의 90% 이상에 AI 도입. 판매 트래킹, 광고 누수 분석, 경쟁사 가격 모니터링 등 전용 프로그램을 직접 개발해 운용합니다.
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-slate-800 text-xs text-indigo-400 font-semibold">
-                  일반 작업자 대비 2~3배 빠른 처리
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* 2. 상품 소싱 & 채널 확장 */}
-            <ScrollReveal delay={150}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-emerald-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -490,7 +465,7 @@ export function App() {
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    02. 상품 소싱 & 기획
+                    01. 상품 소싱 & 기획
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     15년 현장 경력으로 검증된 소싱 안목. 제품별 최적 유통 채널 매칭으로 초기 노출을 극대화하고 빠른 매출 볼륨을 확보합니다.
@@ -502,8 +477,8 @@ export function App() {
               </div>
             </ScrollReveal>
 
-            {/* 3. 일일 판매관리 & 전략 */}
-            <ScrollReveal delay={200}>
+            {/* 2. 판매관리 & 전략 수립 (기본 구성) */}
+            <ScrollReveal delay={150}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-blue-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -515,7 +490,7 @@ export function App() {
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    03. 판매관리 & 전략 수립
+                    02. 판매관리 & 전략 수립
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     자체 개발 프로그램을 통한 일일 판매 데이터 분석. 감이 아닌 정량 지표를 바탕으로 기민한 판매 전략과 상품 컨디션을 관리합니다.
@@ -527,8 +502,8 @@ export function App() {
               </div>
             </ScrollReveal>
 
-            {/* 4. 초고속 상품 최적화 */}
-            <ScrollReveal delay={250}>
+            {/* 3. 초고속 상품 최적화 (기본 구성) */}
+            <ScrollReveal delay={200}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-amber-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -540,7 +515,7 @@ export function App() {
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    04. 초고속 상품 최적화
+                    03. 초고속 상품 최적화
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     매출 성장의 필수 선행 작업인 기초 상품 등록 및 알고리즘 최적화를 100개 기준 단 4~5일 만에 완료하여 시장 기회를 선점합니다.
@@ -552,33 +527,8 @@ export function App() {
               </div>
             </ScrollReveal>
 
-            {/* 5. 상세페이지 기획/제작 */}
-            <ScrollReveal delay={300}>
-              <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-purple-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-11 h-11 rounded-2xl bg-purple-950 text-purple-400 border border-purple-800/60 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-all">
-                      <Layers className="w-5 h-5" />
-                    </div>
-                    <span className="text-[11px] font-semibold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2.5 py-1 rounded-full">
-                      추가 비용 발생
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-base text-white mb-2">
-                    05. 상세페이지 원스톱 제작
-                  </h3>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    고객 리뷰 분석 기반 고전환 기획. 실물 제품과 스마트폰만으로 스튜디오 퀄리티의 상세페이지를 2~3일 내 단독 기획·제작합니다.
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-slate-800 text-xs text-purple-400 font-semibold">
-                  구매전환율 극대화 중심 기획
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* 6. 광고 세팅 & 일일 핸들링 */}
-            <ScrollReveal delay={350}>
+            {/* 4. 광고 운영 & ROAS 극대화 (기본 구성) */}
+            <ScrollReveal delay={250}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-rose-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -590,7 +540,7 @@ export function App() {
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    06. 광고 운영 & ROAS 극대화
+                    04. 광고 운영 & ROAS 극대화
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     주력 채널, 대규모 캠페인 단독 운영 실전 경험. 전용 분석 툴로 누수 광고비를 즉각 차단하고 목표 ROAS를 달성합니다.
@@ -602,8 +552,8 @@ export function App() {
               </div>
             </ScrollReveal>
 
-            {/* 7. 행사 제안 & 프로모션 */}
-            <ScrollReveal delay={400}>
+            {/* 5. 행사 제안 & 일정 조율 (기본 구성) */}
+            <ScrollReveal delay={300}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-teal-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -615,7 +565,7 @@ export function App() {
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    07. 행사 제안 & 일정 조율
+                    05. 행사 제안 & 일정 조율
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     플랫폼 알고리즘 맞춤 행사 기획. 담당자 직접 협업 감소 트렌드에 맞춰 채널별 자체 행사 로직을 파악하고 노출을 극대화합니다.
@@ -627,7 +577,57 @@ export function App() {
               </div>
             </ScrollReveal>
 
-            {/* 8. 무비용 자연 유입 */}
+            {/* 6. AI 업무 자동화 (추가 비용 발생) */}
+            <ScrollReveal delay={350}>
+              <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-indigo-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-indigo-950 text-indigo-400 border border-indigo-800/60 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                      <Cpu className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2.5 py-1 rounded-full">
+                      추가 비용 발생
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-base text-white mb-2">
+                    06. AI & 자동화 툴 개발
+                  </h3>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+                    실무의 90% 이상에 AI 도입. 판매 트래킹, 광고 누수 분석, 경쟁사 가격 모니터링 등 전용 프로그램을 직접 개발해 운용합니다.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-slate-800 text-xs text-indigo-400 font-semibold">
+                  일반 작업자 대비 2~3배 빠른 처리
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* 7. 상세페이지 기획/제작 (추가 비용 발생) */}
+            <ScrollReveal delay={400}>
+              <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-purple-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-purple-950 text-purple-400 border border-purple-800/60 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-all">
+                      <Layers className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2.5 py-1 rounded-full">
+                      추가 비용 발생
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-base text-white mb-2">
+                    07. 상세페이지 원스톱 제작
+                  </h3>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+                    고객 리뷰 분석 기반 고전환 기획. 실물 제품과 스마트폰만으로 스튜디오 퀄리티의 상세페이지를 2~3일 내 단독 기획·제작합니다.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-slate-800 text-xs text-purple-400 font-semibold">
+                  구매전환율 극대화 중심 기획
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* 8. 무비용 자연 유입 (추가 비용 발생) */}
             <ScrollReveal delay={450}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-orange-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
