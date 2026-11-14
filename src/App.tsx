@@ -27,6 +27,7 @@ import { ToolDetailModal, type ToolItem } from './components/ToolDetailModal';
 import { CORE_TOOLS } from './data/tools';
 import { Pagination } from './components/Pagination';
 import { ScrollReveal } from './components/ScrollReveal';
+import { initSinabroAnalytics } from './utils/sinabroAnalytics';
 
 export function App() {
   const [isConsultOpen, setIsConsultOpen] = useState(false);
@@ -36,6 +37,12 @@ export function App() {
   const [showFloatingNav, setShowFloatingNav] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // 시나브로(ws.ai.kr) 통합 방문자 접속 통계 및 체류 시간 자동 트래킹
+  useEffect(() => {
+    const cleanup = initSinabroAnalytics();
+    return cleanup;
+  }, []);
 
   // 스크롤 시 플로팅 네비게이션 노출 및 활성 섹션 감지
   useEffect(() => {
