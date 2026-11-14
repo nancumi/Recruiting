@@ -85,29 +85,29 @@ export function App() {
     <div className="min-h-screen bg-[#07090e] text-slate-100 font-sans selection:bg-indigo-500 selection:text-white">
       {/* 스크롤 시 나타나는 플로팅 메뉴바 (상단 고정 메뉴 제거 요청 반영) */}
       <div
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-40 transition-all duration-500 w-[92%] max-w-4xl ${
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-40 transition-all duration-500 w-[95%] max-w-5xl ${
           showFloatingNav
             ? 'opacity-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 -translate-y-6 pointer-events-none'
         }`}
       >
-        <div className="bg-slate-900/90 backdrop-blur-xl border border-slate-700/80 rounded-2xl px-5 py-3 shadow-2xl flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2.5">
+        <div className="bg-slate-900/90 backdrop-blur-xl border border-slate-700/80 rounded-2xl px-4 sm:px-5 py-2.5 sm:py-3 shadow-2xl flex items-center justify-between gap-3">
+          <a href="#" className="flex items-center gap-2.5 shrink-0">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 text-white flex items-center justify-center font-bold text-sm shadow-md">
               MD
             </div>
-            <span className="font-bold text-white tracking-tight text-sm hidden sm:inline-block">
+            <span className="font-bold text-white tracking-tight text-sm whitespace-nowrap hidden lg:inline-block">
               15년 차 총괄 MD & AI 스페셜리스트
             </span>
           </a>
 
           {/* 데스크톱 메뉴 */}
-          <nav className="hidden md:flex items-center gap-1 bg-slate-950/60 p-1 rounded-xl border border-slate-800">
+          <nav className="hidden lg:flex items-center gap-1 bg-slate-950/60 p-1 rounded-xl border border-slate-800 shrink-0">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                   activeSection === item.id
                     ? 'bg-indigo-600 text-white shadow-sm'
                     : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
@@ -118,28 +118,28 @@ export function App() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => setIsConsultOpen(true)}
-              className="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-500 hover:bg-indigo-400 text-white transition-all shadow-md shadow-indigo-500/20 flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-500 hover:bg-indigo-400 text-white transition-all shadow-md shadow-indigo-500/20 flex items-center gap-1.5 whitespace-nowrap"
             >
-              <span>상담 신청</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span className="whitespace-nowrap">상담 신청</span>
+              <ArrowRight className="w-3.5 h-3.5 shrink-0" />
             </button>
 
-            {/* 모바일 햄버거 토글 */}
+            {/* 모바일/태블릿 햄버거 토글 */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white"
+              className="lg:hidden p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white shrink-0"
             >
               {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
 
-        {/* 모바일 드롭다운 메뉴 */}
+        {/* 모바일/태블릿 드롭다운 메뉴 */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-2 p-3 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-xl flex flex-col gap-1">
+          <div className="lg:hidden mt-2 p-3 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-xl flex flex-col gap-1">
             {navItems.map((item) => (
               <a
                 key={item.id}
