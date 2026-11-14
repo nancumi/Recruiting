@@ -171,3 +171,4 @@ export const initSinabroAnalytics = (): (() => void) => {
     flushDwellTime();
   };
 };
+
