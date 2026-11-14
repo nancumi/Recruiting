@@ -18,6 +18,9 @@ import {
   UserCheck,
   TrendingUp,
   Settings,
+  Eye,
+  MessageSquareText,
+  ShieldCheck,
 } from 'lucide-react';
 import { ConsultationModal, type ServiceTypeOption } from './components/ConsultationModal';
 import { ToolDetailModal, type ToolItem } from './components/ToolDetailModal';
@@ -44,7 +47,7 @@ export function App() {
         setShowFloatingNav(false);
       }
 
-      const sections = ['target', 'philosophy', 'competencies', 'tools', 'pricing', 'meeting'];
+      const sections = ['target', 'philosophy', 'competencies', 'tools', 'pricing', 'scope', 'meeting'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -78,6 +81,7 @@ export function App() {
     { id: 'competencies', label: '수행 역량' },
     { id: 'tools', label: '자체 개발 툴' },
     { id: 'pricing', label: '서비스 요금' },
+    { id: 'scope', label: '관리 범위' },
     { id: 'meeting', label: '대면 미팅' },
   ];
 
@@ -869,7 +873,256 @@ export function App() {
         </div>
       </section>
 
-      {/* 7. 대면 미팅 약속 섹션 */}
+      {/* 7. 서비스 상세 관리 범위 (판매관리, 경쟁사관리, 리뷰관리) */}
+      <section id="scope" className="py-24 max-w-6xl mx-auto px-6 sm:px-8 border-t border-slate-800/80">
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest bg-indigo-950/70 border border-indigo-800/60 px-3 py-1.5 rounded-full">
+              Full-Care Scope
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-3">
+              서비스를 맡기시면 매일 이런 것들을 해드립니다
+            </h2>
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+              단순 형식적인 보고가 아닙니다. 매일 아침 판매 흐름 분석부터 타깃 경쟁사 동향 점검,
+              고객 리뷰 VOC 피드백까지 실제 매출 방어와 성장을 만드는 실무를 전담 관리합니다.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid md:grid-cols-3 gap-7 mb-12">
+          {/* 1. 판매관리 */}
+          <ScrollReveal delay={100}>
+            <div className="bg-slate-900/90 p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-emerald-500/60 hover:shadow-2xl transition-all flex flex-col justify-between h-full group">
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-950 text-emerald-400 border border-emerald-800/60 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-md">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                  <span className="text-xs font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-3 py-1 rounded-full">
+                    일일 판매 흐름 & 재고 방어
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
+                  판매 관리
+                </h3>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6 pb-5 border-b border-slate-800">
+                  매일 발생하는 주문과 판매 데이터를 면밀히 분석하여 매출 누수를 막고 판매 기회를 사수합니다.
+                </p>
+
+                <ul className="space-y-3.5 text-slate-300 text-xs sm:text-sm">
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">일일·월별 판매 추이 정밀 분석</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        상품별 주문 수량, 결제 금액, 마진율 흐름을 매일 점검하여 건강한 매출 성장세 유지
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">급상승·급하락 이상 징후 감지</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        매출이 갑자기 꺾이거나 주문이 폭증할 때 노출 순위와 채널 요인을 즉각 파악 후 조치
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">품절 위험 사전 예측 및 재고 방어</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        최근 판매 속도를 바탕으로 품절 시점을 사전 안내하여 품절로 인한 순위 하락 사전 차단
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">채널별 프로모션 & 단가 최적화</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        시즌 할인, 묶음 구성 등 각 플랫폼 알고리즘에 맞춘 행사 제안과 최적 마진율 방어
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-slate-800/80">
+                <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400">
+                  <ShieldCheck className="w-4 h-4 shrink-0" />
+                  <span>매일 아침 판매 이상 유무 확인 및 즉각 조치</span>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* 2. 경쟁사관리 */}
+          <ScrollReveal delay={200}>
+            <div className="bg-slate-900/90 p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-blue-500/60 hover:shadow-2xl transition-all flex flex-col justify-between h-full group">
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-950 text-blue-400 border border-blue-800/60 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-md">
+                    <Eye className="w-6 h-6" />
+                  </div>
+                  <span className="text-xs font-bold text-blue-400 bg-blue-950/70 border border-blue-800/60 px-3 py-1 rounded-full">
+                    실시간 가격 & 점유율 방어
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                  경쟁사 관리
+                </h3>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6 pb-5 border-b border-slate-800">
+                  주요 경쟁 업체의 가격, 할인, 품절 변동을 상시 추적하여 시장 주도권을 놓치지 않습니다.
+                </p>
+
+                <ul className="space-y-3.5 text-slate-300 text-xs sm:text-sm">
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">주요 경쟁사 가격 변동 밀착 추적</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        타깃 경쟁 상품의 기습 가격 인하, 쿠폰 적용, 게릴라 프로모션을 지속 모니터링
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">경쟁사 품절·가격인상 빈틈 공략</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        경쟁 제품이 일시 품절되거나 단가가 오를 때 우리 상품의 노출과 판촉을 집중해 수요 흡수
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">카테고리 랭킹 및 키워드 순위 방어</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        주요 검색 키워드에서 경쟁사 대비 노출 랭킹 변화를 체크하고 상위 노출 유지 전략 실행
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">신규 진입 상품 및 트렌드 파악</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        빠르게 치고 올라오는 신규 경쟁 업체의 구성과 가격대를 분석해 방어책 선제 마련
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-slate-800/80">
+                <div className="flex items-center gap-2 text-xs font-semibold text-blue-400">
+                  <ShieldCheck className="w-4 h-4 shrink-0" />
+                  <span>경쟁사 움직임에 밀리지 않는 기민한 가격·프로모션 대응</span>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* 3. 리뷰관리 */}
+          <ScrollReveal delay={300}>
+            <div className="bg-slate-900/90 p-7 sm:p-8 rounded-3xl border border-slate-800 hover:border-purple-500/60 hover:shadow-2xl transition-all flex flex-col justify-between h-full group">
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-purple-950 text-purple-400 border border-purple-800/60 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-all shadow-md">
+                    <MessageSquareText className="w-6 h-6" />
+                  </div>
+                  <span className="text-xs font-bold text-purple-400 bg-purple-950/70 border border-purple-800/60 px-3 py-1 rounded-full">
+                    고객 VOC & 구매 전환율 개선
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                  리뷰 관리
+                </h3>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6 pb-5 border-b border-slate-800">
+                  실제 구매 고객의 평가를 정밀 분석하여 이탈 원인을 제거하고 재구매율을 끌어올립니다.
+                </p>
+
+                <ul className="space-y-3.5 text-slate-300 text-xs sm:text-sm">
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">부정 리뷰(1~3점) 즉각 대응 및 분석</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        배송, 불량, 제품 오해 등 고객 불만 발생 시 사유를 즉시 식별하여 확산 및 평점 하락 방지
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">상세페이지 개선 & Q&A 선제 보완</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        리뷰에서 반복되는 고객의 질문이나 오해 지점을 추출해 상세페이지 안내 사항 보완 제안
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">구매 전환을 부르는 긍정 소구점 발굴</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        실구매자가 가장 만족한 특장점 키워드를 도출해 썸네일·광고 카피·상세 상단에 반영
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-white">평점 방어 및 단골 신뢰도 순환</span>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        채널별 평점을 꼼꼼히 관리하여 신규 방문 고객의 구매 결정 장벽을 허물고 반품률 감소
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-slate-800/80">
+                <div className="flex items-center gap-2 text-xs font-semibold text-purple-400">
+                  <ShieldCheck className="w-4 h-4 shrink-0" />
+                  <span>단순 별점 관리를 넘어 반품률 감소와 재구매 전환 유도</span>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+
+        {/* 하단 요약 및 상담 유도 카드 */}
+        <ScrollReveal delay={400}>
+          <div className="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 p-6 sm:p-8 rounded-3xl border border-indigo-900/60 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+            <div className="text-center sm:text-left">
+              <div className="flex items-center justify-center sm:justify-start gap-2 text-indigo-400 font-bold text-sm mb-1.5">
+                <Sparkles className="w-4 h-4" />
+                <span>15년 차 총괄 MD가 대표님의 전담 실무자처럼 직접 챙깁니다</span>
+              </div>
+              <p className="text-slate-300 text-xs sm:text-sm">
+                내부 직원을 뽑기 부담스럽거나, 전문 인력의 세밀한 관리가 필요하신가요? 지금 상담을 신청해 보세요.
+              </p>
+            </div>
+            <button
+              onClick={() => openConsultWith('both')}
+              className="px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-bold bg-indigo-500 hover:bg-indigo-400 text-white transition-all shadow-lg shadow-indigo-500/30 whitespace-nowrap shrink-0 flex items-center gap-2"
+            >
+              <span>전담 관리 서비스 상담 신청하기</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* 8. 대면 미팅 약속 섹션 */}
       <section id="meeting" className="py-24 max-w-5xl mx-auto px-6 sm:px-8">
         <ScrollReveal>
           <div className="bg-gradient-to-br from-indigo-950/60 via-slate-900 to-slate-950 p-10 sm:p-14 rounded-3xl border border-indigo-800/60 text-center space-y-6 shadow-2xl relative overflow-hidden">
