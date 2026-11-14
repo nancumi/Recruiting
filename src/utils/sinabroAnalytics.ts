@@ -23,13 +23,19 @@ const getSinabroDb = () => {
   return getFirestore(app);
 };
 
-// 2. 관리자 세션 판별 (관리자 본인은 통계 집계에서 제외)
+// 2. 관리자 세션 판별 (도메인 간 공유 쿠키 .ws.ai.kr + 로컬 스토리지 + URL 파라미터)
 const isAdminUser = (): boolean => {
   if (typeof window === 'undefined') return false;
   try {
-    if (localStorage.getItem('sinabro_admin_session') === ADMIN_EMAIL) return true;
     const params = new URLSearchParams(window.location.search);
-    if (params.get('admin') === 'true') return true;
+    if (params.get('admin') === 'true') {
+      localStorage.setItem('sinabro_admin_session', ADMIN_EMAIL);
+      document.cookie = 'sinabro_admin=1; domain=.ws.ai.kr; path=/; max-age=31536000; SameSite=Lax';
+      document.cookie = 'sinabro_admin=1; path=/; max-age=31536000; SameSite=Lax';
+      return true;
+    }
+    if (localStorage.getItem('sinabro_admin_session') === ADMIN_EMAIL) return true;
+    if (typeof document !== 'undefined' && document.cookie.includes('sinabro_admin=1')) return true;
   } catch {
     // ignore
   }
@@ -56,7 +62,9 @@ const detectDevice = (): 'mobile' | 'desktop' | 'tablet' => {
 };
 
 /**
- * job.ws.ai.kr 접속 및 체류 시간 자동 트래킹 Hook/초기화 함수
+ * job.ws.ai.kr 접속 및 실제 활성 체류 시간 자동 트래킹 함수
+ * - 백그라운드 탭(hidden) 상태 및 60초 이상 무동작(유휴) 상태일 때는 시간 카운트 즉시 중단
+ * - 세션당 최대 10분(600초) 상한 적용으로 탭 방치로 인한 시간 부풀림 원천 차단
  */
 export const initSinabroAnalytics = (): (() => void) => {
   if (typeof window === 'undefined' || isAdminUser()) {
@@ -112,18 +120,33 @@ export const initSinabroAnalytics = (): (() => void) => {
 
   recordVisit();
 
-  // 2. 체류 시간(머문 시간) 주기적 누적 (15초 주기 + 페이지 벗어날 때)
-  let lastFlushTime = Date.now();
+  // 2. 실제 활성 체류 시간(Active Dwell Time) 정밀 측정
+  let unflushedSeconds = 0;
+  let totalSessionSeconds = 0;
+  let lastInteractionTime = Date.now();
+  const MAX_SESSION_SECONDS = 600; // 단일 방문 세션 최대 10분 상한
+  const IDLE_TIMEOUT_MS = 60000;   // 60초간 마우스/스크롤/터치 없으면 자리 비움(유휴) 처리
+
+  const updateInteraction = () => {
+    lastInteractionTime = Date.now();
+  };
+
+  // 1초마다 탭 활성화 + 최근 60초 이내 사용자 액션 여부 확인 후 1초씩만 누적
+  const tickIntervalId = window.setInterval(() => {
+    if (isAdminUser()) return;
+    const isVisible = document.visibilityState === 'visible';
+    const isRecentlyActive = Date.now() - lastInteractionTime < IDLE_TIMEOUT_MS;
+    if (isVisible && isRecentlyActive && totalSessionSeconds < MAX_SESSION_SECONDS) {
+      unflushedSeconds += 1;
+      totalSessionSeconds += 1;
+    }
+  }, 1000);
 
   const flushDwellTime = async () => {
-    const now = Date.now();
-    const elapsed = Math.round((now - lastFlushTime) / 1000);
-    lastFlushTime = now;
+    if (isAdminUser() || unflushedSeconds <= 0) return;
 
-    if (elapsed <= 0) return;
-
-    // 최대 4시간 초과 비정상 체류 방지
-    const safeSeconds = Math.min(elapsed, 3600);
+    const secondsToSend = unflushedSeconds;
+    unflushedSeconds = 0; // 중복 전송 방지를 위해 즉시 0으로 초기화
 
     try {
       const docRef = doc(db, ANALYTICS_COLLECTION, today);
@@ -132,7 +155,7 @@ export const initSinabroAnalytics = (): (() => void) => {
         {
           contents: {
             [CONTENT_ID]: {
-              totalDwellSeconds: increment(safeSeconds),
+              totalDwellSeconds: increment(secondsToSend),
             },
           },
           updatedAt: Date.now(),
@@ -144,15 +167,15 @@ export const initSinabroAnalytics = (): (() => void) => {
     }
   };
 
-  // 15초마다 주기적으로 누적
-  const intervalId = window.setInterval(flushDwellTime, 15000);
+  // 15초마다 누적된 활성 시간 전송
+  const flushIntervalId = window.setInterval(flushDwellTime, 15000);
 
-  // 탭 숨김 or 페이지 이탈 시 전송
+  // 탭 숨김 or 페이지 이탈 시 남은 활성 시간 전송
   const handleVisibilityChange = () => {
     if (document.visibilityState === 'hidden') {
       flushDwellTime();
     } else {
-      lastFlushTime = Date.now();
+      lastInteractionTime = Date.now();
     }
   };
 
@@ -160,15 +183,23 @@ export const initSinabroAnalytics = (): (() => void) => {
     flushDwellTime();
   };
 
+  window.addEventListener('pointerdown', updateInteraction, { passive: true });
+  window.addEventListener('pointermove', updateInteraction, { passive: true });
+  window.addEventListener('keydown', updateInteraction, { passive: true });
+  window.addEventListener('scroll', updateInteraction, { passive: true });
   document.addEventListener('visibilitychange', handleVisibilityChange);
   window.addEventListener('beforeunload', handleBeforeUnload);
 
   // 정리(클린업) 함수
   return () => {
-    window.clearInterval(intervalId);
+    window.clearInterval(tickIntervalId);
+    window.clearInterval(flushIntervalId);
+    window.removeEventListener('pointerdown', updateInteraction);
+    window.removeEventListener('pointermove', updateInteraction);
+    window.removeEventListener('keydown', updateInteraction);
+    window.removeEventListener('scroll', updateInteraction);
     document.removeEventListener('visibilitychange', handleVisibilityChange);
     window.removeEventListener('beforeunload', handleBeforeUnload);
     flushDwellTime();
   };
 };
-
