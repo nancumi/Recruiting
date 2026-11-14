@@ -908,7 +908,7 @@ export function App() {
                   판매 관리
                 </h3>
                 <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6 pb-5 border-b border-slate-800">
-                  매일 발생하는 주문과 판매 데이터를 면밀히 분석하여 매출 누수를 막고 판매 기회를 사수합니다.
+                  매일 발생하는 주문과 판매 데이터를 분석하여 매출 누수를 막고 판매 기회를 사수합니다.
                 </p>
 
                 <ul className="space-y-3.5 text-slate-300 text-xs sm:text-sm">
@@ -969,7 +969,7 @@ export function App() {
                     <Eye className="w-6 h-6" />
                   </div>
                   <span className="text-xs font-bold text-blue-400 bg-blue-950/70 border border-blue-800/60 px-3 py-1 rounded-full">
-                    실시간 가격 & 점유율 방어
+                    경쟁사의 가격 & 할인 체크
                   </span>
                 </div>
 
@@ -1002,9 +1002,9 @@ export function App() {
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-semibold text-white">카테고리 랭킹 및 키워드 순위 방어</span>
+                      <span className="font-semibold text-white">경쟁사 판매량 변화 추적</span>
                       <p className="text-slate-400 text-xs mt-0.5">
-                        주요 검색 키워드에서 경쟁사 대비 노출 랭킹 변화를 체크하고 상위 노출 유지 전략 실행
+                        주요 경쟁 상품의 일일·주간 판매량 증감 흐름을 파악하여 시장 수요 변화에 즉각 대응
                       </p>
                     </div>
                   </li>
@@ -1023,7 +1023,7 @@ export function App() {
               <div className="pt-6 mt-6 border-t border-slate-800/80">
                 <div className="flex items-center gap-2 text-xs font-semibold text-blue-400">
                   <ShieldCheck className="w-4 h-4 shrink-0" />
-                  <span>경쟁사 움직임에 밀리지 않는 기민한 가격·프로모션 대응</span>
+                  <span>경쟁사 움직임에 따른 가격·프로모션 대응</span>
                 </div>
               </div>
             </div>
@@ -1053,9 +1053,9 @@ export function App() {
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-semibold text-white">부정 리뷰(1~3점) 즉각 대응 및 분석</span>
+                      <span className="font-semibold text-white">자사 및 경쟁사 리뷰 비교 분석</span>
                       <p className="text-slate-400 text-xs mt-0.5">
-                        배송, 불량, 제품 오해 등 고객 불만 발생 시 사유를 즉시 식별하여 확산 및 평점 하락 방지
+                        경쟁사와 자사의 고객 리뷰를 교차 분석하여 공통 불만 요소를 찾고 차별화 소구점 도출
                       </p>
                     </div>
                   </li>
@@ -1092,7 +1092,7 @@ export function App() {
               <div className="pt-6 mt-6 border-t border-slate-800/80">
                 <div className="flex items-center gap-2 text-xs font-semibold text-purple-400">
                   <ShieldCheck className="w-4 h-4 shrink-0" />
-                  <span>단순 별점 관리를 넘어 반품률 감소와 재구매 전환 유도</span>
+                  <span>단순 관리를 넘어 반품률 감소, 재구매 전환 유도</span>
                 </div>
               </div>
             </div>
