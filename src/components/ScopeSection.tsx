@@ -1189,9 +1189,9 @@ export function ScopeSection({ onOpenConsult }: ScopeSectionProps) {
             <li className="flex items-start gap-2">
               <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
               <div>
-                <span className="font-semibold text-white">품절 위험 사전 예측 및 재고 방어</span>
+                <span className="font-semibold text-white">조회수 대비 구매 전환율 & 효율 점검</span>
                 <p className="text-slate-400 text-[11px] mt-0.5 leading-snug">
-                  판매 속도를 바탕으로 품절 시점을 미리 안내하여 품절로 인한 순위 하락 차단
+                  옵션별 조회수 대비 실제 구매 전환율과 투입 광고비를 대조하여 수익성 진단
                 </p>
               </div>
             </li>
@@ -1408,8 +1408,9 @@ export function ScopeSection({ onOpenConsult }: ScopeSectionProps) {
             서비스를 맡기시면 매일 이런 것들을 해드립니다
           </h2>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            단순 형식적인 보고가 아닙니다. 매일 아침 판매 흐름 분석부터 타깃 경쟁사 동향 점검,
-            광고 효율 최적화까지 실제 매출 방어와 성장을 만드는 실무를 전담 관리합니다.
+            아래 예시 화면은 유니드에서 직접 관리해 드리고 대표님과 함께 보며 소통하는 실제 화면입니다.
+            <br className="hidden sm:inline" />
+            이렇게 제품 하나하나의 판매·경쟁사·광고 흐름을 세밀하게 파악하고 매일 밀착 관리할 수 있습니다.
           </p>
         </div>
       </ScrollReveal>

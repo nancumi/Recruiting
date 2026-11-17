@@ -52,7 +52,7 @@ export function App() {
         setShowFloatingNav(false);
       }
 
-      const sections = ['target', 'philosophy', 'competencies', 'tools', 'pricing', 'scope', 'meeting'];
+      const sections = ['target', 'scope', 'philosophy', 'competencies', 'tools', 'pricing', 'meeting'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -82,11 +82,11 @@ export function App() {
 
   const navItems = [
     { id: 'target', label: '추천 대상' },
+    { id: 'scope', label: '관리 범위' },
     { id: 'philosophy', label: '운영 철학' },
     { id: 'competencies', label: '수행 역량' },
     { id: 'tools', label: '자체 개발 툴' },
     { id: 'pricing', label: '서비스 요금' },
-    { id: 'scope', label: '관리 범위' },
     { id: 'meeting', label: '대면 미팅' },
   ];
 
@@ -347,8 +347,11 @@ export function App() {
         </div>
       </section>
 
-      {/* 3. 왜 감이 아닌 시스템인가? (운영 철학 섹션) */}
-      <section id="philosophy" className="py-24 max-w-6xl mx-auto px-6 sm:px-8">
+      {/* 3. 서비스 상세 관리 범위 (판매관리, 경쟁사관리, 광고관리) */}
+      <ScopeSection onOpenConsult={openConsultWith} />
+
+      {/* 4. 왜 감이 아닌 시스템인가? (운영 철학 섹션) */}
+      <section id="philosophy" className="py-24 max-w-6xl mx-auto px-6 sm:px-8 border-t border-slate-800/80">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest bg-indigo-950/70 border border-indigo-800/60 px-3 py-1.5 rounded-full">
@@ -457,33 +460,8 @@ export function App() {
 
           {/* 8대 역량 그리드 카드 (기본 구성 01~05, 추가 비용 발생 06~08) */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {/* 1. 상품 소싱 & 기획 (기본 구성) */}
+            {/* 1. 판매관리 & 전략 수립 (기본 구성) */}
             <ScrollReveal delay={100}>
-              <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-emerald-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-11 h-11 rounded-2xl bg-emerald-950 text-emerald-400 border border-emerald-800/60 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all">
-                      <Package className="w-5 h-5" />
-                    </div>
-                    <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2.5 py-1 rounded-full">
-                      기본 구성
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-base text-white mb-2">
-                    01. 상품 소싱 & 기획
-                  </h3>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    15년 현장 경력으로 검증된 소싱 안목. 제품별 최적 유통 채널 매칭으로 초기 노출을 극대화하고 빠른 매출 볼륨을 확보합니다.
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-slate-800 text-xs text-emerald-400 font-semibold">
-                  검증된 시장성 및 채널 확장
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* 2. 판매관리 & 전략 수립 (기본 구성) */}
-            <ScrollReveal delay={150}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-blue-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -495,7 +473,7 @@ export function App() {
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    02. 판매관리 & 전략 수립
+                    01. 판매관리 & 전략 수립
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     자체 개발 프로그램을 통한 일일 판매 데이터 분석. 감이 아닌 정량 지표를 바탕으로 기민한 판매 전략과 상품 컨디션을 관리합니다.
@@ -507,8 +485,8 @@ export function App() {
               </div>
             </ScrollReveal>
 
-            {/* 3. 초고속 상품 최적화 (기본 구성) */}
-            <ScrollReveal delay={200}>
+            {/* 2. 초고속 상품 최적화 (기본 구성) */}
+            <ScrollReveal delay={150}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-amber-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -520,7 +498,7 @@ export function App() {
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    03. 초고속 상품 최적화
+                    02. 초고속 상품 최적화
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     매출 성장의 필수 선행 작업인 기초 상품 등록 및 알고리즘 최적화를 100개 기준 단 4~5일 만에 완료하여 시장 기회를 선점합니다.
@@ -532,8 +510,8 @@ export function App() {
               </div>
             </ScrollReveal>
 
-            {/* 4. 광고 운영 & ROAS 극대화 (기본 구성) */}
-            <ScrollReveal delay={250}>
+            {/* 3. 광고 운영 & ROAS 극대화 (기본 구성) */}
+            <ScrollReveal delay={200}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-rose-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -545,7 +523,7 @@ export function App() {
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    04. 광고 운영 & ROAS 극대화
+                    03. 광고 운영 & ROAS 극대화
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     주력 채널, 대규모 캠페인 단독 운영 실전 경험. 전용 분석 툴로 누수 광고비를 즉각 차단하고 목표 ROAS를 달성합니다.
@@ -557,8 +535,8 @@ export function App() {
               </div>
             </ScrollReveal>
 
-            {/* 5. 행사 제안 & 일정 조율 (기본 구성) */}
-            <ScrollReveal delay={300}>
+            {/* 4. 행사 제안 & 일정 조율 (기본 구성) */}
+            <ScrollReveal delay={250}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-teal-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -570,7 +548,7 @@ export function App() {
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    05. 행사 제안 & 일정 조율
+                    04. 행사 제안 & 일정 조율
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     플랫폼 알고리즘 맞춤 행사 기획. 담당자 직접 협업 감소 트렌드에 맞춰 채널별 자체 행사 로직을 파악하고 노출을 극대화합니다.
@@ -582,20 +560,20 @@ export function App() {
               </div>
             </ScrollReveal>
 
-            {/* 6. AI 업무 자동화 (추가 비용 발생) */}
-            <ScrollReveal delay={350}>
+            {/* 5. AI & 자동화 툴 개발 (기본 구성 맨 뒷자리로 이동) */}
+            <ScrollReveal delay={300}>
               <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-indigo-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-11 h-11 rounded-2xl bg-indigo-950 text-indigo-400 border border-indigo-800/60 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all">
                       <Cpu className="w-5 h-5" />
                     </div>
-                    <span className="text-[11px] font-semibold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2.5 py-1 rounded-full">
-                      추가 비용 발생
+                    <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2.5 py-1 rounded-full">
+                      기본 구성
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-white mb-2">
-                    06. AI & 자동화 툴 개발
+                    05. AI & 자동화 툴 개발
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
                     실무의 90% 이상에 AI 도입. 판매 트래킹, 광고 누수 분석, 경쟁사 가격 모니터링 등 전용 프로그램을 직접 개발해 운용합니다.
@@ -603,6 +581,31 @@ export function App() {
                 </div>
                 <div className="pt-3 border-t border-slate-800 text-xs text-indigo-400 font-semibold">
                   일반 작업자 대비 2~3배 빠른 처리
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* 6. 상품 소싱 & 기획 (추가 비용 발생 맨 앞자리로 이동) */}
+            <ScrollReveal delay={350}>
+              <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-emerald-500/60 hover:shadow-xl transition-all flex flex-col justify-between h-full group">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-emerald-950 text-emerald-400 border border-emerald-800/60 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                      <Package className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2.5 py-1 rounded-full">
+                      추가 비용 발생
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-base text-white mb-2">
+                    06. 상품 소싱 & 기획
+                  </h3>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+                    15년 현장 경력으로 검증된 소싱 안목. 제품별 최적 유통 채널 매칭으로 초기 노출을 극대화하고 빠른 매출 볼륨을 확보합니다.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-slate-800 text-xs text-emerald-400 font-semibold">
+                  검증된 시장성 및 채널 확장
                 </div>
               </div>
             </ScrollReveal>
@@ -663,11 +666,11 @@ export function App() {
       {/* 5. 자체 개발 프로그램 쇼케이스 (모달창, 페이지네이션 탑재) */}
       <section id="tools" className="py-24 max-w-6xl mx-auto px-6 sm:px-8">
         <ScrollReveal>
-          <div className="mb-12">
+          <div className="text-center max-w-3xl mx-auto mb-14">
             <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest bg-indigo-950/70 border border-indigo-800/60 px-3 py-1.5 rounded-full">
               Proprietary Tools
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-2">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-3">
               실무에 직접 사용하는 자체 개발 프로그램
             </h2>
             <p className="text-slate-400 text-sm sm:text-base">
@@ -695,8 +698,11 @@ export function App() {
                         <ChevronRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
-                    <h3 className="font-bold text-base sm:text-lg text-white mb-3 group-hover:text-indigo-400 transition-colors">
-                      {tool.name}
+                    <h3 className="font-bold text-base sm:text-lg text-white mb-3 group-hover:text-indigo-400 transition-colors leading-snug">
+                      <span className="block">{tool.name}</span>
+                      <span className="block text-sm sm:text-[15px] text-slate-300 group-hover:text-indigo-300 font-semibold mt-0.5">
+                        {tool.subName}
+                      </span>
                     </h3>
                     <p className="text-slate-400 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-6">
                       {tool.shortDesc}
@@ -877,9 +883,6 @@ export function App() {
           </div>
         </div>
       </section>
-
-      {/* 7. 서비스 상세 관리 범위 (판매관리, 경쟁사관리, 광고관리) */}
-      <ScopeSection onOpenConsult={openConsultWith} />
 
       {/* 8. 대면 미팅 약속 섹션 */}
       <section id="meeting" className="py-24 max-w-5xl mx-auto px-6 sm:px-8">
