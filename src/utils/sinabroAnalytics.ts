@@ -61,6 +61,18 @@ const detectDevice = (): 'mobile' | 'desktop' | 'tablet' => {
   return isMobile ? 'mobile' : 'desktop';
 };
 
+// 5. 고유 방문자 ID 가져오기 (없으면 자동 생성)
+const getOrCreateVisitorId = (): string => {
+  if (typeof window === 'undefined') return 'server';
+  const key = 'sinabro_vid_v1';
+  let vid = localStorage.getItem(key);
+  if (!vid) {
+    vid = `v_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+    localStorage.setItem(key, vid);
+  }
+  return vid;
+};
+
 /**
  * job.ws.ai.kr 접속 및 실제 활성 체류 시간 자동 트래킹 함수
  * - 백그라운드 탭(hidden) 상태 및 60초 이상 무동작(유휴) 상태일 때는 시간 카운트 즉시 중단
@@ -75,6 +87,7 @@ export const initSinabroAnalytics = (): (() => void) => {
   const today = getTodayString();
   const hour = String(new Date().getHours());
   const device = detectDevice();
+  const visitorId = getOrCreateVisitorId();
 
   // 일별 순수 방문자(UV) 여부
   const lastUvKey = 'job_last_uv_date';
@@ -84,7 +97,7 @@ export const initSinabroAnalytics = (): (() => void) => {
     localStorage.setItem(lastUvKey, today);
   }
 
-  // 1. 사이트 접속 및 콘텐츠 뷰 기록 (PV, UV, 시간대, 기기 분포)
+  // 1. 사이트 접속 및 콘텐츠 뷰 기록 (PV, UV, 시간대, 기기 분포, 방문자별 세부 내역)
   const recordVisit = async () => {
     try {
       const docRef = doc(db, ANALYTICS_COLLECTION, today);
@@ -107,6 +120,16 @@ export const initSinabroAnalytics = (): (() => void) => {
               pv: increment(1),
               ...(isNewUv ? { uv: increment(1) } : {}),
               totalDwellSeconds: increment(0),
+              visitors: {
+                [visitorId]: {
+                  visitorId,
+                  device,
+                  visits: increment(1),
+                  dwellSeconds: increment(0),
+                  lastVisitedAt: Date.now(),
+                  date: today,
+                },
+              },
             },
           },
           updatedAt: Date.now(),
@@ -156,6 +179,15 @@ export const initSinabroAnalytics = (): (() => void) => {
           contents: {
             [CONTENT_ID]: {
               totalDwellSeconds: increment(secondsToSend),
+              visitors: {
+                [visitorId]: {
+                  visitorId,
+                  device,
+                  dwellSeconds: increment(secondsToSend),
+                  lastVisitedAt: Date.now(),
+                  date: today,
+                },
+              },
             },
           },
           updatedAt: Date.now(),
