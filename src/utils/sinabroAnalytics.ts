@@ -73,6 +73,49 @@ const getOrCreateVisitorId = (): string => {
   return vid;
 };
 
+// 6. 유입 직전 이전 URL(Referrer) 판별 및 세션 보존
+const detectReferrerSource = (): string => {
+  if (typeof window === 'undefined') return '직접 접속';
+  const REF_SESSION_KEY = 'job_initial_referrer';
+  try {
+    const cached = sessionStorage.getItem(REF_SESSION_KEY);
+    if (cached) return cached;
+
+    let detected = '';
+    const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get('utm_source') || params.get('ref') || params.get('from');
+    if (utmSource) {
+      detected = utmSource;
+    } else if (document.referrer) {
+      try {
+        const refUrl = new URL(document.referrer);
+        if (refUrl.hostname !== window.location.hostname) {
+          detected =
+            refUrl.hostname +
+            (refUrl.pathname && refUrl.pathname !== '/' ? refUrl.pathname : '');
+        }
+      } catch {
+        detected = document.referrer;
+      }
+    }
+
+    if (!detected) {
+      const ua = navigator.userAgent || '';
+      if (/KAKAOTALK/i.test(ua)) detected = '카카오톡 공유';
+      else if (/Instagram/i.test(ua)) detected = 'instagram.com';
+      else if (/NAVER\(inapp/i.test(ua)) detected = 'naver.com (앱)';
+      else if (/FBAN|FBAV/i.test(ua)) detected = 'facebook.com';
+      else if (/Threads/i.test(ua)) detected = 'threads.net';
+      else detected = '직접 접속 (Direct)';
+    }
+
+    sessionStorage.setItem(REF_SESSION_KEY, detected);
+    return detected;
+  } catch {
+    return '직접 접속 (Direct)';
+  }
+};
+
 /**
  * job.ws.ai.kr 접속 및 실제 활성 체류 시간 자동 트래킹 함수
  * - 백그라운드 탭(hidden) 상태 및 60초 이상 무동작(유휴) 상태일 때는 시간 카운트 즉시 중단
@@ -88,6 +131,7 @@ export const initSinabroAnalytics = (): (() => void) => {
   const hour = String(new Date().getHours());
   const device = detectDevice();
   const visitorId = getOrCreateVisitorId();
+  const referrer = detectReferrerSource();
 
   // 일별 순수 방문자(UV) 여부
   const lastUvKey = 'job_last_uv_date';
@@ -119,13 +163,14 @@ export const initSinabroAnalytics = (): (() => void) => {
               title: CONTENT_TITLE,
               pv: increment(1),
               ...(isNewUv ? { uv: increment(1) } : {}),
-              totalDwellSeconds: increment(0),
+              totalDwellSeconds: increment(1),
               visitors: {
                 [visitorId]: {
                   visitorId,
                   device,
+                  referrer,
                   visits: increment(1),
-                  dwellSeconds: increment(0),
+                  dwellSeconds: increment(1),
                   lastVisitedAt: Date.now(),
                   date: today,
                 },
@@ -154,17 +199,6 @@ export const initSinabroAnalytics = (): (() => void) => {
     lastInteractionTime = Date.now();
   };
 
-  // 1초마다 탭 활성화 + 최근 60초 이내 사용자 액션 여부 확인 후 1초씩만 누적
-  const tickIntervalId = window.setInterval(() => {
-    if (isAdminUser()) return;
-    const isVisible = document.visibilityState === 'visible';
-    const isRecentlyActive = Date.now() - lastInteractionTime < IDLE_TIMEOUT_MS;
-    if (isVisible && isRecentlyActive && totalSessionSeconds < MAX_SESSION_SECONDS) {
-      unflushedSeconds += 1;
-      totalSessionSeconds += 1;
-    }
-  }, 1000);
-
   const flushDwellTime = async () => {
     if (isAdminUser() || unflushedSeconds <= 0) return;
 
@@ -183,6 +217,7 @@ export const initSinabroAnalytics = (): (() => void) => {
                 [visitorId]: {
                   visitorId,
                   device,
+                  referrer,
                   dwellSeconds: increment(secondsToSend),
                   lastVisitedAt: Date.now(),
                   date: today,
@@ -199,8 +234,22 @@ export const initSinabroAnalytics = (): (() => void) => {
     }
   };
 
-  // 15초마다 누적된 활성 시간 전송
-  const flushIntervalId = window.setInterval(flushDwellTime, 15000);
+  // 1초마다 탭 활성화 + 최근 60초 이내 사용자 액션 여부 확인 후 1초씩 누적, 3초마다 실시간 반영
+  const tickIntervalId = window.setInterval(() => {
+    if (isAdminUser()) return;
+    const isVisible = document.visibilityState === 'visible';
+    const isRecentlyActive = Date.now() - lastInteractionTime < IDLE_TIMEOUT_MS;
+    if (isVisible && isRecentlyActive && totalSessionSeconds < MAX_SESSION_SECONDS) {
+      unflushedSeconds += 1;
+      totalSessionSeconds += 1;
+      if (unflushedSeconds >= 3) {
+        flushDwellTime();
+      }
+    }
+  }, 1000);
+
+  // 3초 주기 보조 전송
+  const flushIntervalId = window.setInterval(flushDwellTime, 3000);
 
   // 탭 숨김 or 페이지 이탈 시 남은 활성 시간 전송
   const handleVisibilityChange = () => {
