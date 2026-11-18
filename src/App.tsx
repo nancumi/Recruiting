@@ -195,14 +195,14 @@ export function App() {
           {/* 서브 카피 */}
           <ScrollReveal delay={300}>
             <p className="text-slate-300 max-w-4xl mx-auto text-sm sm:text-lg md:text-xl font-normal leading-relaxed mb-10 sm:mb-12 break-keep">
-              업무의 90% 이상에 AI를 도입하고 전용 관리 프로그램을 직접 개발하여 활용합니다.
+              판매 데이터 분석부터 쿠팡·스마트스토어 광고 최적화, 경쟁사 가격 모니터링까지
               <br className="hidden sm:inline" />{' '}
               <span className="sm:inline-block">
-                15년 실무 안목과 자체 자동화 기술로 남들보다{' '}
+                15년 실무 안목과 자체 개발 솔루션으로{' '}
                 <strong className="text-white font-bold">
-                  2~3배 빠르고 정교하게
-                </strong>{' '}
-                효율적인 작업을 합니다.
+                  쇼핑몰 매출 관리와 ROAS 개선, 광고비 누수 방지
+                </strong>
+                를 정교하게 해결합니다.
               </span>
             </p>
           </ScrollReveal>
