@@ -25,6 +25,7 @@ import { CORE_TOOLS } from './data/tools';
 import { Pagination } from './components/Pagination';
 import { ScrollReveal } from './components/ScrollReveal';
 import { ScopeSection } from './components/ScopeSection';
+import { VideoSection } from './components/VideoSection';
 import { initSinabroAnalytics } from './utils/sinabroAnalytics';
 
 export function App() {
@@ -268,6 +269,9 @@ export function App() {
           </ScrollReveal>
         </div>
       </section>
+
+      {/* 실무 프로세스 및 솔루션 시연 영상 섹션 */}
+      <VideoSection />
 
       {/* 2. 이런 분들에게 적극 추천합니다 (추천 대상 섹션) */}
       <section id="target" className="py-20 max-w-6xl mx-auto px-6 sm:px-8 border-b border-slate-800/80">
